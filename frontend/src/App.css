@@ -494,3 +494,40 @@ body {
 /* Scrollbar */
 .sidebar::-webkit-scrollbar { width: 3px; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+.thinking-badge {
+  font-size: 11px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  animation: pulse 1s infinite;
+}
+
+.speaking-badge {
+  font-size: 11px;
+  color: var(--green);
+  font-family: var(--font-mono);
+  animation: pulse 1s infinite;
+}
+
+.listening-badge {
+  font-size: 11px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  animation: pulse 0.5s infinite;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.stop-btn {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-main);
+}

@@ -34,7 +34,12 @@ async def ask_local_ai(messages: list, system_prompt: str) -> str:
         payload = {
             "model": OLLAMA_MODEL,
             "messages": [{"role": "system", "content": system_prompt}] + messages,
-            "stream": False
+            "stream": False,
+            "options": {
+                "num_predict": 100,
+                "temperature": 0.7,
+                "num_ctx": 512
+            }
         }
         print(f"[Jarvis] Sending to Ollama: {OLLAMA_URL}")
         async with httpx.AsyncClient(timeout=120.0) as client:
@@ -87,18 +92,11 @@ You know the following about the user:
 - Preferences: {memory.get('preferences', 'none noted')}
 - Current projects: {memory.get('projects', 'none noted')}
 """
-    system_prompt = f"""You are Jarvis, a personal AI assistant.
-You are helpful, concise, and intelligent.
-You assist with coding, research, daily tasks, and computer control.
+    system_prompt = f"""You are Jarvis, AI assistant. Be very brief and direct. Max 2-3 sentences.
 {memory_context}
-When the user asks to open an app or website, respond with:
-ACTION:OPEN_APP:<app_name> or ACTION:OPEN_URL:<url>
-
-When the user asks to search something, respond with:
-ACTION:SEARCH:<query>
-
-Otherwise just respond naturally and helpfully.
-Keep responses focused and not overly long."""
+To open apps: ACTION:OPEN_APP:<name>
+To open URLs: ACTION:OPEN_URL:<url>
+To search: ACTION:SEARCH:<query>"""
 
     model_choice = classify_request(message)
     history_formatted = [{"role": m["role"], "content": m["content"]} for m in history]
