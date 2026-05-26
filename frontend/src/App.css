@@ -531,3 +531,25 @@ body {
   cursor: pointer;
   font-family: var(--font-main);
 }
+.paused-badge {
+  font-size: 11px;
+  color: var(--yellow);
+  font-family: var(--font-mono);
+}
+
+.pause-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: all 0.2s;
+}
+
+.pause-btn.paused {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
